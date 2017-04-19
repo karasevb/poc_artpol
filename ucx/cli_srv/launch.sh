@@ -1,11 +1,13 @@
 #!/bin/bash
 
-export LD_LIBRARY_PATH="/labhome/artemp/mtr_scrap/UCX/for_hackathon/ucx/install/lib:$LD_LIBRARY_PATH"
+ulimit -c unlimited
 
-export UCX_NET_DEVICES=mlx5_0:1
-export UCX_TLS=ud
+export LD_LIBRARY_PATH="/sandbox/ucx/lib:$LD_LIBRARY_PATH"
 
-/labhome/artemp/mtr_scrap/UCX/for_hackathon/openmpi-2.0.1/install/bin/mpirun \
+#export UCX_NET_DEVICES=mlx5_0:1
+#export UCX_TLS=ud
+
+/home/user/ompi/v2.x/build_ucx/install/bin/mpirun \
         -np $1 --mca btl self,vader,tcp \
         --mca pml ob1 --mca mtl ^mxm  \
         --map-by node \
